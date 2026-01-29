@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "7Wonders",
     "name": "7WondersScoring",
     "slug": "7WondersScoring",
     "version": "1.0.0",
@@ -24,6 +25,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
