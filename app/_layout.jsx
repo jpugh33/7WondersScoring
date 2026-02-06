@@ -1,4 +1,4 @@
-import { StyleSheet, Text, useColorScheme, View } from 'react-native'
+import { StyleSheet,  useColorScheme } from 'react-native'
 import { Stack } from 'expo-router'
 import { Colors } from '../constants/Colors'
 import { StatusBar } from 'expo-status-bar'
