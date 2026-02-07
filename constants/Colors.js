@@ -3,21 +3,21 @@ export const Colors = {
   warning: "#cc475a",
   
   dark: {
-    text: "#d4d4d4",
-    title: "#fff",
+    text: "#33c1fa",
+    title: "#87CEEB",
     background: "#141413",
-    navBackground: "#201e2b",
+    navBackground: "#0d0d07",
     iconColor: "#9591a5",
     iconColorFocused: "#fff",
     uiBackground: "#2f2b3d",
   },
   light: {
-    text: "#625f72",
-    title: "#201e2b",
+    text: "#392b87",
+    title: "#140857",
     background: "#ededc5",
-    navBackground: "#e8e7ef",
+    navBackground: "#b1b37c",
     iconColor: "#686477",
     iconColorFocused: "#201e2b",
-    uiBackground: "#d6d5e1",
+    uiBackground: "#e44b13",
   },
 }
