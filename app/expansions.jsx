@@ -1,40 +1,38 @@
 import { StyleSheet, Text } from 'react-native'
 import { Link } from 'expo-router'
-import { Colors } from '../../constants/Colors'
+import { Colors } from '../constants/Colors'
 
-import ThemedView from '../../components/ThemedView'
-import ThemedText from '../../components/ThemedText'
-import ThemedButton from '../../components/ThemedButton'
-import Spacer from '../../components/Spacer'
+import ThemedView from '../components/ThemedView'
+import ThemedText from '../components/ThemedText'
+import ThemedButton from '../components/ThemedButton'
+import Spacer from '../components/Spacer'
 
-const Login = () => {
+const Expansions = () => {
 
   const handleSubmit = () => {
-    console.log('Login submitted')
+    console.log('Expansions submitted')
   }
 
   return (
     <ThemedView style={styles.container}>
       <Spacer />
       <ThemedText title={true} style={styles.title}>
-        Login to Your Account
+        Select any expansions.
       </ThemedText>
 
+      {/* <CheckBox /> */}
+
       <ThemedButton onPress={handleSubmit}>
-        <Text style={{ color: '#f2f2f2' }}>Login</Text>
+        <Text style={{ color: '#f2f2f2' }}>Continue</Text>
       </ThemedButton>
 
       <Spacer height={100} />
-      <Link href='/register'>
-        <ThemedText style={{textAlign: 'center'}}>
-            Register Instead
-        </ThemedText>
-      </Link>
+      
     </ThemedView>
   )
 }
 
-export default Login
+export default Expansions
 
 const styles = StyleSheet.create({
     container: {

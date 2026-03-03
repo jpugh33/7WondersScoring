@@ -1,14 +1,21 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import { Link } from 'expo-router'
 
 import ThemedView from '../components/ThemedView'
 import ThemedLogo from '../components/ThemedLogo'
-import Spacer from '../components/Spacer'
 import ThemedText from '../components/ThemedText'
+import ThemedButton from '../components/ThemedButton'
+import Spacer from '../components/Spacer'
 
 const Home = () => {
+
+  const handleSubmit = () => {
+    console.log('Login submitted')
+  }
+  
   return (
     <ThemedView style={styles.container}>
+      <Spacer height={60}/>
       <ThemedLogo />
       <Spacer height={20}/>
 
@@ -18,12 +25,17 @@ const Home = () => {
       <ThemedText>Scoring App</ThemedText>
       <Spacer />
 
-      <Link href='/login' style={styles.link}>
-        <ThemedText>Login Page</ThemedText>
+      <Link href='/expansions' style={styles.link}>
+        <ThemedText>Expansions Page</ThemedText>
       </Link>
       <Link href='/register' style={styles.link}>
         <ThemedText>Register Page</ThemedText>
       </Link>
+
+      <ThemedButton onPress={handleSubmit}>
+        <Text style={{ color: '#f2f2f2' }}>Create Scorecard</Text>
+      </ThemedButton>
+
     </ThemedView>
   )
 }
@@ -34,7 +46,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        // justifyContent: 'center'
     },
     title: {
         fontWeight: 'bold',
