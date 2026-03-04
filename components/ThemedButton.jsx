@@ -2,11 +2,12 @@ import { Pressable, StyleSheet } from "react-native"
 
 import { Colors } from "../constants/Colors"
 
-function ThemedButton({ style, ...props }) {
+function ThemedButton({ style, isDisabled, ...props }) {
 
   return (
     <Pressable 
-      style={({ pressed }) => [styles.btn, pressed && styles.pressed, style]}
+      style={({ pressed }) => [styles.btn, pressed && !isDisabled && styles.pressed, style]}
+      disabled={ isDisabled }
       {...props}
     />
   )

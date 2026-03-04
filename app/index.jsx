@@ -31,6 +31,7 @@ const Home = () => {
       <Link href='/setup' style={styles.link}>
         <ThemedText>Setup Page</ThemedText>
       </Link>
+      <Spacer />
 
       <ThemedButton onPress={handleSubmit}>
         <Text style={{ color: '#f2f2f2' }}>Create Scorecard</Text>

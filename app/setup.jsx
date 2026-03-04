@@ -8,19 +8,25 @@ import ThemedTextInput from '../components/ThemedTextInput'
 import Spacer from '../components/Spacer'
 
 var i = 0
+var players = []
 
 const Setup = () => {
   const [player, setPlayer] = useState('')
-  var players = []
 
   const handleSubmit = () => {
-    players[i] = player
-    console.log(`Player ${i + 1}: ${player}`)
+    if (player === 'null' || players.includes(player)) {
+      console.log("error: no value or player already exists")
+      return
+    }
+    players.push(player)
+    for (var j=0; j<players.length; j++) {
+        console.log(`${i} ${j} ${players[j]}`)
+    }
     i++
   }
 
   const handleRandomize =() => {
-    console.log('randomized')
+    console.log('randomized', {i})
   }
 
   return (
@@ -30,7 +36,7 @@ const Setup = () => {
       <Spacer />
 
       <ThemedTextInput
-        editable={i<7 ? true : false}
+        editable={i<6 ? true : false}
         style={{width:'80%', marginBottom:20}}
         placeholder='Player name'
         onChangeText={setPlayer}
@@ -47,7 +53,7 @@ const Setup = () => {
       <Spacer />
 
       <ThemedButton
-        disabled={i>3 && i<7 ? true : false}
+        disabled={i<2 ? true : false}
         onPress={handleRandomize}
       >
         <Text>Randomize Boards</Text>
