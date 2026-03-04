@@ -28,8 +28,8 @@ const Home = () => {
       <Link href='/expansions' style={styles.link}>
         <ThemedText>Expansions Page</ThemedText>
       </Link>
-      <Link href='/register' style={styles.link}>
-        <ThemedText>Register Page</ThemedText>
+      <Link href='/setup' style={styles.link}>
+        <ThemedText>Setup Page</ThemedText>
       </Link>
 
       <ThemedButton onPress={handleSubmit}>
