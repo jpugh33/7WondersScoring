@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FlatList, StyleSheet, Text } from 'react-native'
-import { Link } from 'expo-router'
+import { useRouter } from 'expo-router'
 import { Colors } from '../constants/Colors'
 
 import ThemedCheckBox from '../components/ThemedCheckBox'
@@ -16,8 +16,19 @@ const initialData = [
   { id: 4, label: 'Leaders', isChecked: false }
 ]
 
+var boards = [
+  'Alexandria',
+  'Babylon',
+  'Ephesos',
+  'Gizah',
+  'Halikarnassos',
+  'Olympia',
+  'Rhodos',
+]
+
 const Expansions = () => {
   const [listItems, setListItems] = useState(initialData)
+  const router = useRouter()
 
   const toggleCheckbox = (id) => {
     setListItems(
@@ -28,7 +39,16 @@ const Expansions = () => {
   }
 
   const handleSubmit = () => {
+    const selected = listItems
+      .filter(item => item.isChecked)
+      .map(item => item.label)
+
     console.log('Expansions submitted')
+
+    router.push({
+      pathname: '/setup',
+      params: { expansions: JSON.stringify(selected) }
+    })
   }
 
   const renderItem = ({ item }) => (
@@ -60,6 +80,15 @@ const Expansions = () => {
       
     </ThemedView>
   )
+}
+
+export function setBoards(data) {
+  if (!data.length) { return boards } 
+  if (data.includes('Armada')) { boards.push('Siracusa') }
+  if (data.includes('Cities')) { boards.push('city') }
+  if (data.includes('Edifice')) { boards.push('eddie') }
+  if (data.includes('Leaders')) { boards.push('liter') }
+  return boards
 }
 
 export default Expansions

@@ -1,7 +1,7 @@
 import { TextInput, useColorScheme } from 'react-native'
 import { Colors } from '../constants/Colors'
 
-const ThemedTextInput = ({ style, ...props }) => {
+const ThemedTextInput = ({ style, isEditable, ...props }) => {
   const colorScheme = useColorScheme()
   const theme = Colors[colorScheme] ?? Colors.light
 
@@ -16,6 +16,7 @@ const ThemedTextInput = ({ style, ...props }) => {
         },
         style
       ]}
+      editable={ isEditable }
       {...props}
     />
   )

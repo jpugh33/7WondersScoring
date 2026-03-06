@@ -1,5 +1,5 @@
 import { StyleSheet, Text } from 'react-native'
-import { Link } from 'expo-router'
+import { Link, useRouter } from 'expo-router'
 
 import ThemedView from '../components/ThemedView'
 import ThemedLogo from '../components/ThemedLogo'
@@ -8,9 +8,11 @@ import ThemedButton from '../components/ThemedButton'
 import Spacer from '../components/Spacer'
 
 const Home = () => {
+  const router = useRouter()
 
   const handleSubmit = () => {
-    console.log('Login submitted')
+    console.log('Scorecard created')
+    router.push('/expansions')
   }
   
   return (
