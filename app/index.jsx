@@ -23,17 +23,9 @@ const Home = () => {
 
       <ThemedText style={styles.title} title={true}>7 Wonders</ThemedText>
 
-      <Spacer height={10} />
+      <Spacer height={10}/>
       <ThemedText>Scoring App</ThemedText>
-      <Spacer />
-
-      <Link href='/expansions' style={styles.link}>
-        <ThemedText>Expansions Page</ThemedText>
-      </Link>
-      <Link href='/setup' style={styles.link}>
-        <ThemedText>Setup Page</ThemedText>
-      </Link>
-      <Spacer />
+      <Spacer height={110}/>
 
       <ThemedButton onPress={handleSubmit}>
         <Text style={{ color: '#f2f2f2' }}>Create Scorecard</Text>

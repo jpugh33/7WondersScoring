@@ -9,10 +9,23 @@ import ThemedButton from '../components/ThemedButton'
 import ThemedTextInput from '../components/ThemedTextInput'
 import Spacer from '../components/Spacer'
 
-var players = []
+let players = []
+
+class Place {
+  constructor(leader, wonder) {
+    this.leader = leader
+    this.wonder = wonder
+  }
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min)) + min
+}
 
 const Setup = () => {
-  var boards
+  let boards
   const { expansions } = useLocalSearchParams()
   const selectedExpansions = expansions ? JSON.parse(expansions) : []
   const [player, setPlayer] = useState('')
@@ -28,8 +41,16 @@ const Setup = () => {
   }
 
   const handleRandomize =() => {
+    let cities = []
     boards = setBoards(selectedExpansions)
+    for (let i=0; i<players.length; i++) {
+      let num = getRandomInt(0, boards.length)
+      let temp = new Place(players[i], boards[num])
+      cities.push(temp)
+      boards.splice(num, 1)
+    }
     console.log(boards, players.length)
+    console.log(cities)
   }
 
   return (

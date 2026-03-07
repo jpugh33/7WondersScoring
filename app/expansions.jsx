@@ -16,7 +16,7 @@ const initialData = [
   { id: 4, label: 'Leaders', isChecked: false }
 ]
 
-var boards = [
+let boards = [
   'Alexandria',
   'Babylon',
   'Ephesos',
