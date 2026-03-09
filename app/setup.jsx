@@ -11,12 +11,7 @@ import Spacer from '../components/Spacer'
 
 let players = []
 
-class Place {
-  constructor(leader, wonder) {
-    this.leader = leader
-    this.wonder = wonder
-  }
-}
+const createPlace = (id, leader, wonder) => ({ leader, wonder, id })
 
 function getRandomInt(min, max) {
   min = Math.ceil(min)
@@ -29,6 +24,7 @@ const Setup = () => {
   const { expansions } = useLocalSearchParams()
   const selectedExpansions = expansions ? JSON.parse(expansions) : []
   const [player, setPlayer] = useState('')
+  const router = useRouter()
 
   const handleSubmit = () => {
     if (player === 'null' || players.includes(player)) {
@@ -40,17 +36,21 @@ const Setup = () => {
     setPlayer('')
   }
 
-  const handleRandomize =() => {
+  const handleRandomize = () => {
     let cities = []
     boards = setBoards(selectedExpansions)
     for (let i=0; i<players.length; i++) {
       let num = getRandomInt(0, boards.length)
-      let temp = new Place(players[i], boards[num])
-      cities.push(temp)
+      cities.push(createPlace(i+1, players[i], boards[num]))
       boards.splice(num, 1)
     }
-    console.log(boards, players.length)
     console.log(cities)
+    console.log(boards, players.length)
+
+    router.push({
+      pathname: '/scorelist',
+      params: { places: JSON.stringify(cities) }
+    })
   }
 
   return (
