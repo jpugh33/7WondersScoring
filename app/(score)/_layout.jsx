@@ -38,10 +38,10 @@ const DashboardLayout = () => {
           />
         )}}
       />
-      {/* <Tabs.Screen 
-        name='books/[id]'
+      <Tabs.Screen 
+        name='indie/[id]'
         options={{ href: null }}
-      /> */}
+      />
     </Tabs>
   )
 }

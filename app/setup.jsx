@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableWithoutFeedback, Keyboard } from 'react-nati
 import { useState } from 'react'
 import { setBoards } from './expansions'
 import { useRouter, useLocalSearchParams } from 'expo-router'
+import { Records } from '../store/records'
 
 import ThemedView from '../components/ThemedView'
 import ThemedText from '../components/ThemedText'
@@ -9,48 +10,49 @@ import ThemedButton from '../components/ThemedButton'
 import ThemedTextInput from '../components/ThemedTextInput'
 import Spacer from '../components/Spacer'
 
-let players = []
-
-const createPlace = (id, leader, wonder) => ({ leader, wonder, id })
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min)) + min
-}
+const createPlace = (id, player, board) => ({ id, player, board })
 
 const Setup = () => {
-  let boards
   const { expansions } = useLocalSearchParams()
   const selectedExpansions = expansions ? JSON.parse(expansions) : []
   const [player, setPlayer] = useState('')
   const router = useRouter()
+
+  const players = Records(s => s.players)
+  const addPlayer = Records(s => s.addPlayer)
+  const setBoardsGlobal = Records(s => s.setBoards)
+  const setPlaces = Records(s => s.setPlaces)
+
 
   const handleSubmit = () => {
     if (player === 'null' || players.includes(player)) {
       console.log("error: no value or player already exists")
       return
     }
-    players.push(player)
+    addPlayer(player)
     console.log(players)
     setPlayer('')
   }
 
   const handleRandomize = () => {
-    let cities = []
-    boards = setBoards(selectedExpansions)
-    for (let i=0; i<players.length; i++) {
-      let num = getRandomInt(0, boards.length)
-      cities.push(createPlace(i+1, players[i], boards[num]))
-      boards.splice(num, 1)
-    }
-    console.log(cities)
-    console.log(boards, players.length)
+    const baseBoards = Records.getState().boards
+    const expansionBoards = setBoards(selectedExpansions)
+    const allBoards = [...baseBoards, ...expansionBoards]
 
-    router.push({
-      pathname: '/scorelist',
-      params: { places: JSON.stringify(cities) }
-    })
+    setBoardsGlobal(allBoards)
+
+    let availableBoards = [...allBoards]
+
+    let cities = []
+    for (let i=0; i<players.length; i++) {
+      let num = Math.floor(Math.random() * availableBoards.length)
+      cities.push(createPlace(i+1, players[i], availableBoards[num]))
+      availableBoards.splice(num, 1)
+    }
+    console.log(availableBoards)
+    setPlaces(cities)
+
+    router.push('/scorelist')
   }
 
   return (

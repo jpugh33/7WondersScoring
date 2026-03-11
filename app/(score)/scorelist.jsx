@@ -3,6 +3,7 @@ import { FlatList, Pressable, StyleSheet, Text } from 'react-native'
 import { useRouter } from 'expo-router'
 import { useLocalSearchParams } from 'expo-router'
 import { Colors } from '../../constants/Colors'
+import { Records } from '../../store/records'
 
 import ThemedCheckBox from '../../components/ThemedCheckBox'
 import ThemedView from '../../components/ThemedView'
@@ -12,10 +13,22 @@ import ThemedButton from '../../components/ThemedButton'
 import Spacer from '../../components/Spacer'
 
 const ScoreList = () => {
-  const { places } = useLocalSearchParams()
-  const cities = places ? JSON.parse(places) : [{"id": 1, "leader": "Belle", "wonder": "Rhodos"}, {"id": 2, "leader": "Jasmine", "wonder": "Halikarnassos"}, {"id": 3, "leader": "Aurora", "wonder": "Ephesos"}, {"id": 4, "leader": "Ariel", "wonder": "Olympia"}, {"id": 5, "leader": "Alice", "wonder": "Siracusa"}, {"id": 6, "leader": "Megara", "wonder": "Gizah"}, {"id": 7, "leader": "Merida", "wonder": "Babylon"}]
+  // const { places } = useLocalSearchParams()
+  // const places = places ? JSON.parse(places) : []
+  const router = useRouter()
 
-  console.log(cities)
+  const players = Records(s => s.players)
+  const boards = Records(s => s.boards)
+  const places = Records(s => s.places)
+  const addPlayer = Records(s => s.addPlayer)
+  const setBoardsGlobal = Records(s => s.setBoards)
+  const setPlaces = Records(s => s.setPlaces)
+
+  console.log(places)
+
+  function handlePress(id) {
+    router.push(`/indie/${id}`)
+  }
 
   return (
     <ThemedView style={styles.container} safe={true}>
@@ -27,14 +40,14 @@ const ScoreList = () => {
       <Spacer />
 
       <FlatList
-        data={cities}
+        data={places}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
         renderItem={({item}) => (
-          <Pressable onPress>
+          <Pressable onPress={() => handlePress(item.id)}>
             <ThemedCard style={styles.card}>
-              <ThemedText style={styles.title}>{item.leader}</ThemedText>
-              <ThemedText>{item.wonder}</ThemedText>
+              <ThemedText style={styles.title}>{item.player}</ThemedText>
+              <ThemedText>{item.board}</ThemedText>
             </ThemedCard>
           </Pressable>
         )}

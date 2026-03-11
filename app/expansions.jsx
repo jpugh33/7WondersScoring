@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FlatList, StyleSheet, Text } from 'react-native'
 import { useRouter } from 'expo-router'
 import { Colors } from '../constants/Colors'
+import { Records } from '../store/records'
 
 import ThemedCheckBox from '../components/ThemedCheckBox'
 import ThemedView from '../components/ThemedView'
@@ -14,16 +15,6 @@ const initialData = [
   { id: 2, label: 'Cities', isChecked: false },
   { id: 3, label: 'Edifice', isChecked: false },
   { id: 4, label: 'Leaders', isChecked: false }
-]
-
-let boards = [
-  'Alexandria',
-  'Babylon',
-  'Ephesos',
-  'Gizah',
-  'Halikarnassos',
-  'Olympia',
-  'Rhodos',
 ]
 
 const Expansions = () => {
@@ -83,12 +74,19 @@ const Expansions = () => {
 }
 
 export function setBoards(data) {
-  if (!data.length) { return boards } 
-  if (data.includes('Armada')) { boards.push('Siracusa') }
-  if (data.includes('Cities')) { boards.push('city') }
-  if (data.includes('Edifice')) { boards.push('eddie') }
-  if (data.includes('Leaders')) { boards.push('liter') }
-  return boards
+  const store = Records.getState()
+  let arr = []
+
+  if (!data || !data.length) { return [] } 
+
+  if (data.includes('Armada')) { arr.push('Siracusa') }
+  if (data.includes('Cities')) { arr.push('city') }
+  if (data.includes('Edifice')) { arr.push('eddie') }
+  if (data.includes('Leaders')) { arr.push('liter') }
+
+  store.setBoards(arr)
+
+  return arr
 }
 
 export default Expansions
