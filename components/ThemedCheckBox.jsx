@@ -1,11 +1,13 @@
-import { TouchableOpacity, StyleSheet } from 'react-native'
-// You'll need to install expo vector icons, e.g., expo install @expo/vector-icons
+import { TouchableOpacity, StyleSheet, useColorScheme } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
+import { Colors } from '../constants/Colors'
+
 import ThemedText from './ThemedText'
 
-
-
 const ThemedCheckBox = ({ label, isChecked, onPress }) => {
+  const colorScheme = useColorScheme()
+  const theme = Colors[colorScheme] ?? Colors.light
+
   return (
     <TouchableOpacity style={styles.checkboxContainer} onPress={onPress}>
       <MaterialIcons
