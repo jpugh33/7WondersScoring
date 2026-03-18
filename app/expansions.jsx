@@ -79,10 +79,21 @@ export function setBoards(data) {
 
   if (!data || !data.length) { return [] } 
 
-  if (data.includes('Armada')) { arr.push('Siracusa') }
-  if (data.includes('Cities')) { arr.push('city') }
-  if (data.includes('Edifice')) { arr.push('eddie') }
-  if (data.includes('Leaders')) { arr.push('liter') }
+  if (data.includes('Armada')) {
+    arr.push('Siracusa')
+  }
+  if (data.includes('Cities')) {
+    arr.push('Byzantine')
+    arr.push('Petra')
+  }
+  if (data.includes('Edifice')) {
+    arr.push('Carthage')
+    arr.push('Ur')
+  }
+  if (data.includes('Leaders')) {
+    arr.push('Abu Simbel')
+    arr.push('Roma')  
+  }
 
   store.setBoards(arr)
 
