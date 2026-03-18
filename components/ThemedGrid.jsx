@@ -8,132 +8,169 @@ import ThemedView from './ThemedView'
 import ThemedTextInput from './ThemedTextInput'
 import Spacer from './Spacer'
 
-const ThemedTable = ({
+const ThemedGrid = ({
   players = [],
+  symbolIcons = [],
+  symbolIds = [],
   data = {},
   onChangeCell
-
 }) => {
   const colorScheme = useColorScheme()
   const theme = Colors[colorScheme] ?? Colors.light
 
   const boards = Records(s => s.boards)
 
-  const symbols = [
-    <Ionicons
-      size={24}
-      name={'prism'}
-      color={'gold'}
-    />,
-    <AntDesign
-      size={24}
-      name={'dollar-circle'}
-      color={'gold'}
-    />,
-    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-      <Ionicons
-        size={24}
-        name={'shield'}
-        color={'red'}
-      />
-      <View style={{width: 6}} />
-      <MaterialCommunityIcons
-        size={24}
-        name={'octagon'}
-        color={'red'}
-      />
-    </View>,
-    <MaterialIcons
-      size={24}
-      name={'rectangle'}
-      color={'lightblue'}
-      style={{ transform: [ {rotate: '90deg'}] }}
-    />,
-    <Ionicons
-      size={24}
-      name={'ellipse'}
-      color={'lightyellow'}
-    />,
-    <Ionicons
-      size={24}
-      name={'triangle'}
-      color={'lightgreen'}
-    />,
-    <Ionicons
-      size={24}
-      name={'star'}
-      color={'violet'}
-    />
-  ]
+  // const symbolIcons = [
+  //   <Ionicons
+  //     size={24}
+  //     name={'prism'}
+  //     color={'gold'}
+  //   />,
+  //   <AntDesign
+  //     size={24}
+  //     name={'dollar-circle'}
+  //     color={'gold'}
+  //   />,
+  //   <View style={{flexDirection: 'row', alignItems: 'center'}}>
+  //     <Ionicons
+  //       size={24}
+  //       name={'shield'}
+  //       color={'red'}
+  //     />
+  //     <View style={{width: 6}} />
+  //     <MaterialCommunityIcons
+  //       size={24}
+  //       name={'octagon'}
+  //       color={'red'}
+  //     />
+  //   </View>,
+  //   <MaterialIcons
+  //     size={24}
+  //     name={'rectangle'}
+  //     color={'lightblue'}
+  //     style={{ transform: [ {rotate: '90deg'}] }}
+  //   />,
+  //   <Ionicons
+  //     size={24}
+  //     name={'ellipse'}
+  //     color={'lightyellow'}
+  //   />,
+  //   <Ionicons
+  //     size={24}
+  //     name={'triangle'}
+  //     color={'lightgreen'}
+  //   />,
+  //   <Ionicons
+  //     size={24}
+  //     name={'star'}
+  //     color={'violet'}
+  //   />
+  // ]
 
-  if (boards.includes('Byzantine')) {
-    symbols.push(
-      <Ionicons
-        size={24}
-        name={'ellipse-outline'}
-        color={'gray'}
-      />
-    )
-  }
+  // const symbolIds = [
+  //   "wonder",
+  //   "coin",
+  //   "army",
+  //   "blue",
+  //   "yellow",
+  //   "green",
+  //   "purple"
+  // ]
 
-  if (boards.includes('Abu Simbel')) {
-    symbols.push(
-      <MaterialIcons
-        size={24}
-        name={'face'}
-        color={'lightgray'}
-      />
-    )
-  }
 
-  if (boards.includes('Siracusa')) { 
-    symbols.push(
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <MaterialIcons
-          size={24}
-          name={'anchor'}
-          color={'blue'}
-        />
-        <View style={{width: 6}} />
-        <MaterialCommunityIcons
-          size={24}
-          name={'pentagon'}
-          color={'blue'}
-        />
-      </View>,
-      <MaterialCommunityIcons
-        size={24}
-        name={'island'}
-        color={'lightblue'}
-      />
-    )
-  }
+  // if (boards.includes('Byzantine')) {
+  //   symbolIcons.push(
+  //     <Ionicons
+  //       size={24}
+  //       name={'ellipse-outline'}
+  //       color={'gray'}
+  //     />
+  //   )
+  //   symbolIds.push("black")
+  // }
 
-  if (boards.includes('Carthage')) {
-    symbols[1] = (
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <AntDesign
-          size={24}
-          name={'dollar-circle'}
-          color={'gold'}
-        />
-        <View style={{width: 6}} />
-        <MaterialIcons
-          size={24}
-          name={'square'}
-          color={'grey'}
-        />
-      </View>
-    )
-  }
+  // if (boards.includes('Abu Simbel')) {
+  //   symbolIcons.push(
+  //     <MaterialIcons
+  //       size={24}
+  //       name={'face'}
+  //       color={'lightgray'}
+  //     />
+  //   )
+  //   symbolIds.push("white")
+  // }
 
-  symbols.push(
-    <MaterialCommunityIcons
-      size={24}
-      name={'sigma'}
-      color={'black'}
-    />
-  )
+  // if (boards.includes('Siracusa')) { 
+  //   symbolIcons.push(
+  //     <View style={{flexDirection: 'row', alignItems: 'center'}}>
+  //       <MaterialIcons
+  //         size={24}
+  //         name={'anchor'}
+  //         color={'blue'}
+  //       />
+  //       <View style={{width: 6}} />
+  //       <MaterialCommunityIcons
+  //         size={24}
+  //         name={'pentagon'}
+  //         color={'blue'}
+  //       />
+  //     </View>,
+  //     <MaterialCommunityIcons
+  //       size={24}
+  //       name={'island'}
+  //       color={'lightblue'}
+  //     />
+  //   )
+  //   symbolIds.push("navy")
+  //   symbolIds.push("island")    
+  // }
+
+  // if (boards.includes('Carthage')) {
+  //   symbolIcons[1] = (
+  //     <View style={{flexDirection: 'row', alignItems: 'center'}}>
+  //       <AntDesign
+  //         size={24}
+  //         name={'dollar-circle'}
+  //         color={'gold'}
+  //       />
+  //       <View style={{width: 6}} />
+  //       <MaterialIcons
+  //         size={24}
+  //         name={'square'}
+  //         color={'grey'}
+  //       />
+  //     </View>
+  //   )
+  // }
+
+  // symbolIcons.push(
+  //   <MaterialCommunityIcons
+  //     size={24}
+  //     name={'sigma'}
+  //     color={'black'}
+  //   />
+  // )
+  // symbolIds.push("total")
+
+  // const computeTotals = (data, symbolIds, players) => {
+  //   const totals = {}
+
+  //   players.forEach(player => {
+  //     let sum = 0
+
+  //     symbolIds.forEach(symbol => {
+  //       if (symbol === "total") return
+
+  //       const key = `${symbol}_${player}`
+  //       const value = parseInt(data[key] || 0, 10)
+  //       sum += value
+  //     })
+
+  //     totals[`total_${player}`] = sum
+  //   })
+
+  //   return totals
+  // }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -152,7 +189,7 @@ const ThemedTable = ({
             </View>
 
             {/* Symbol Rows */}
-            {symbols.map((symbol, rowIndex) => (
+            {symbolIds.map((symbol, rowIndex) => (
               <View key={rowIndex} style={styles.row}>
                 
                 {/* Left Symbol Cell */}
@@ -160,7 +197,7 @@ const ThemedTable = ({
                   style={[styles.cell, styles.header]} 
                 >
                   <ThemedView style={{ width: 24, height: 24, justifyContent: 'center', alignItems: 'center' }}>
-                    {symbol}
+                    {symbolIcons[rowIndex]}
                   </ThemedView>
                 </ThemedView>
 
@@ -168,16 +205,26 @@ const ThemedTable = ({
                 {players.map((player, colIndex) => {
                   const key = `${symbol}_${player}`
                   const value = data[key] ?? ""
+                  const isTotalRow = symbol === "total"
 
                   return (
                     <View key={colIndex} style={styles.cell}>
-                      <ThemedTextInput
-                        style={styles.input}
-                        keyboardType="number-pad"
-                        defaultValue="0"
-                        value={String(value)}
-                        onChangeText={text => onChangeCell(symbol, player, text)}
-                      />
+                      {isTotalRow ? (
+                        <ThemedText style={[styles.cell, styles.header]}>
+                          {value}
+                        </ThemedText>
+                      ) : (
+                        <ThemedTextInput
+                          style={styles.input}
+                          keyboardType="number-pad"
+                          value={String(value)}
+                          onChangeText={text => {
+                            const cleaned = text.replace(/[^0-9]/g, "")
+                            const normalized = cleaned.replace(/^0+(?=\d)/, "")
+                            onChangeCell(symbol, player, normalized)
+                          }}
+                        />
+                      )}
                     </View>
                   )
                 })}
@@ -226,4 +273,4 @@ const styles = StyleSheet.create({
 
 
 
-export default ThemedTable
+export default ThemedGrid
